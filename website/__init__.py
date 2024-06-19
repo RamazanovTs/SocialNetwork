@@ -7,14 +7,13 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'YOUR_SECRET_KEY')
-    # Use environment variable for PostgreSQL URL, fallback to local database
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_secret_key_here')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://localhost/database_name')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications for SQLAlchemy
 
     db.init_app(app)
 
-    # Register blueprints
+    # Import blueprints and models
     from .views import views
     from .auth import auth
     app.register_blueprint(views, url_prefix='/')
