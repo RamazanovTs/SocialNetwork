@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div id="content">
+    {% for post in posts[::-1] %}
+    <div class="item">
+        <h1>{{ post.title }}</h1>
+        {% if post.author.username == user.username %}
+        <h4 class="current_user">Author: <a href="/myposts" target="_blank">{{ post.author.username }}</a></h4> 
+        {% else %}
+        <h4>Author: <a href="{{ url_for('views.userpost', user_id=post.author.id) }}">{{ post.author.username }}</a></h4> 
+        {% endif %}     
+        <p>{{ post.body }}</p>
+        <form class="like-form" action="{{ url_for('views.like_post', post_id=post.id) }}" method="POST">
+            <button class="like-button btn btn-primary" type="submit">
+                <span class="heart">❤️</span> 
+                <span class="counter">{{ post.like_count }}</span>
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 10px;
+}
+
+.item {
+    position: relative; /* Added for positioning the close button */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 20px);
+    max-width: 800px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+}
+
+.item h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.item h4 {
+    font-size: 16px;
+    color: #666;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.current_user {
+    color: blue !important;
+}
+
+.heart-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.heart {
+    font-size: 20px;
+    color: red;
+}
+
+.counter {
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+h3 {
+    color: grey;
+    text-align: center;
+}
+
+.Head {
+    text-align: center;
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Position to the top-right */
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+    outline: none; /* Remove the outline on focus */
+}
+
+.delete-button:hover {
+    color: darkred;
+}
+
+.delete-button:focus {
+    outline: none; 
+}
+
+@media (max-width: 1200px) {
+    .item {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 992px) {
+    .item {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .item {
+        width: 100%;
+    }
+}

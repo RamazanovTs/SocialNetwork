@@ -1,0 +1,29 @@
+{%extends "base.html" %}
+{% block title %}Post | {{user.username}}{% endblock %}
+
+{% block content %}
+
+<style>
+    h1{
+        text-align: center;
+    }
+    h3{
+        text-align: center;
+    }
+    form{
+        padding: 20px;
+    }
+</style>
+
+<h1>Welcome {{user.username}}</h1>
+<h3>Create Post</h3>
+<form method="POST">
+    <textarea name="title" id="title" class="form-control" placeholder="Title" rows="3"></textarea>
+    <textarea name="body" id="body" class="form-control" placeholder="Content" rows="5"></textarea>
+    <br />
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Submit Post</button>
+    </div>
+  </form>
+
+{%endblock%}

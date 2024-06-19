@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Post | {{ user.username }}{% endblock %}
+
+{% block content %}
+
+<h1 class="Head">{{ user.username }}'s Posts</h1>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div id="content">
+    {% for post in posts[::-1] %}
+    <div class="item">
+        <h1>{{ post.title }}</h1>
+        <h4>Author: {{ post.author.username }}</h4>      
+        
+        <p>{{ post.body }}</p>
+        <form class="like-form" action="{{ url_for('views.like_post', post_id=post.id) }}" method="POST">
+            <button class="like-button btn btn-primary" type="submit">
+                <span class="heart">❤️</span> 
+                <span class="counter">{{ post.like_count }}</span>
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

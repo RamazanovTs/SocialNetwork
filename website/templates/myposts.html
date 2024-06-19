@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Post | {{ user.username }}{% endblock %}
+
+{% block content %}
+
+<h1 class="Head">Welcome {{ user.username }}</h1>
+<h3>Your Posts</h3>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div id="content">
+    {% for post in posts[::-1] %}
+    <div class="item">
+
+        <form action="{{ url_for('views.delete_post', post_id=post.id) }}" class="delete-form" method="POST">
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            <button type="submit" class="close delete-button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </form>
+        <h1>{{ post.title }}</h1>
+
+        {% if post.author.username == user.username %}
+        <h4 class="current_user">Author: {{ post.author.username }}</h4> 
+        {% else %}
+        <h4>Author: {{ post.author.username }}</h4> 
+        {% endif %}        
+        
+        <p>{{ post.body }}</p>
+        <form class="like-form" action="{{ url_for('views.like_post', post_id=post.id) }}" method="POST">
+            <button class="like-button btn btn-primary" type="submit">
+                <span class="heart">❤️</span> 
+                <span class="counter">{{ post.like_count }}</span>
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
