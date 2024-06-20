@@ -4,8 +4,8 @@ from sqlalchemy.sql import func
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), nullable=False, unique=True)
-    password = db.Column(db.String(128), nullable=False)
+    username = db.Column(db.String(256), nullable=False, unique=True)  # Adjusted to 256 characters
+    password = db.Column(db.String(), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
 
 class Post(db.Model):
