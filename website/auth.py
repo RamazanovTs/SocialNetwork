@@ -15,7 +15,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged In successfully!', category='success')
+                flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
@@ -41,17 +41,17 @@ def sign_up():
         user = User.query.filter_by(username=username).first()
 
         if user:
-            flash("User Already exists", category='error')
+            flash("User already exists", category='error')
         elif password1 != password2:
             flash('Passwords must be equal', category='error')
         elif len(password1) < 6:
             flash('Passwords must be greater than 6 characters', category='error')
         else:
-            new_user = User(username=username, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(username=username, password=generate_password_hash(password1,method='scrypt'))
             db.session.add(new_user)
             db.session.commit()
-            flash('Account Created!', category="success")
-            login_user(new_user, remember=True)  # Corrected line
+            flash('Account created!', category="success")
+            login_user(new_user, remember=True)
             return redirect(url_for('views.home'))
 
     return render_template('signup.html', user=current_user)
